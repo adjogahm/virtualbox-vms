@@ -23,14 +23,16 @@ Vagrant.configure("2") do |config|
 
     # Share an additional folder to the guest VM via Network Shared Folder.
     # You can find it at `/vagrant` on guest VM.
-    mojave.vm.synced_folder "./synced-folder/ENV['VM_NAME']", "/vagrant",
+    @vmname = ENV['VM_NAME']
+    system "mkdir", "-p", "./synced-folder/#{@vmname}"
+    mojave.vm.synced_folder "./synced-folder/#{@vmname}", "/vagrant",
       id: "vagrant-root",
       :nfs => true,
       :mount_options => ['nolock,vers=3,udp,noatime,actimeo=1,resvport'],
       :export_options => ['async,insecure,no_subtree_check,no_acl,no_root_squash']
     
     mojave.vm.provider "virtualbox" do |vb|
-      vb.name = ENV['VM_NAME']
+      vb.name = @vmname
   
       # Display the VirtualBox GUI when booting the machine. You might want to turn 3D accelerating to speed-up VM GUI.
       # vb.gui = true
@@ -81,14 +83,16 @@ Vagrant.configure("2") do |config|
 
     # Share an additional folder to the guest VM via Network Shared Folder.
     # You can find it at `/vagrant` on guest VM.
-    catalina.vm.synced_folder "./synced-folder/ENV['VM_NAME']", "/vagrant",
+    @vmname = ENV['VM_NAME']
+    system "mkdir", "-p", "./synced-folder/#{@vmname}"
+    catalina.vm.synced_folder "./synced-folder/#{@vmname}", "/vagrant",
       id: "vagrant-root",
       :nfs => true,
       :mount_options => ['nolock,vers=3,udp,noatime,actimeo=1,resvport'],
       :export_options => ['async,insecure,no_subtree_check,no_acl,no_root_squash']
     
     catalina.vm.provider "virtualbox" do |vb|
-      vb.name = ENV['VM_NAME']
+      vb.name = @vmname
   
       # Display the VirtualBox GUI when booting the machine. You might want to turn 3D accelerating to speed-up VM GUI.
       # vb.gui = true

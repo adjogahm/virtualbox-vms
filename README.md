@@ -16,40 +16,45 @@ Vagrant and VirtualBox are required. Install them running:
 brew cask install virtualbox
 brew cask install virtualbox-extension-pack
 brew cask install vagrant
-brew cask install vagrant-manager
+brew cask install vagrant-manager # optional
 ```
 
 ## Deploy a VM
 
-Run the following for instance:
+### 
+Run the following:
 ```bash
 git clone git@github.com:adjogahm/virtualbox-vms.git
 
 VAGRANT_VAGRANTFILE="./virtualbox-vms/template.Vagrantfile" \
   VAGRANT_HOME="~/.vagrant.d" \
-  VM_NAME="<`*`my VM name`*`>" \
-  vagrant up "<`*`my VM type`*`>"
+  VM_NAME="<VirtualBox VM name>" \
+  vagrant up "<Vagrant box (type)>"
 ```
-> For `*`my VM type`*` 👉 [Supported](#supported)
+> For `<`Vagrant box (type)`>` 👉 [Supported](#supported)
 
+### UI Credentials
+* Username: vagrant
+* Password: vagrant
 
 ## Manage your VM boxes
 
 ### With vagrant cli [docs](https://www.vagrantup.com/docs/cli)
 ```bash
-vagrant global-status       # Gets a list of your current Vagrant boxes
-vagrant reload [name|id]    # Reloads a change of config on your Vagrantfile
+vagrant global-status                    # Gets a list of your current Vagrant boxes
+vagrant reload [name|id]                 # Reloads a change of config on your Vagrantfile
 
 vagrant ssh [name|id] [-- extra_ssh_args]
 
-vagrant suspend [name|id]   # Suspends the guest machine Vagrant is managing, rather than fully shutting it down or destroying it
-vagrant resume [name|id]    # Resumes a Vagrant managed machine that was previously suspended
-vagrant halt [name|id]      # Shuts down the running machine Vagrant is managing
+vagrant suspend [name|id]                # Suspends the guest machine, rather than fully shutting it down or destroying it
+vagrant resume [name|id]                 # Resumes a Vagrant managed machine that was previously suspended
+vagrant halt [name|id]                   # Shuts down the running machine Vagrant is managing
 
-vagrant snapshot save [vm-name] NAME        # Saves a new named snapshot
-vagrant snapshot restore [vm-name] NAME     # Restores the named snapshot
+vagrant snapshot save [vm-name] NAME     # Saves a new named snapshot
+vagrant snapshot restore [vm-name] NAME  # Restores the named snapshot
 
-vagrant destroy [name|id]
+vagrant destroy [name|id]                # Destroy your VM using an id obtained from `vagrant global-status`
+vagrant box remove NAME                  # Delete the box being used to create the VM
 ```
 
 ### With Vagrant Manager

@@ -12,7 +12,8 @@ Vagrant.configure("2") do |config|
 
   ###
   # Any macOS Mojave will be created from this Vagrant VM configuration
-  ###
+  ##
+  @vmname = ENV['VM_NAME']
   config.vm.define "mojave", primary: true do |mojave|
     # Every Vagrant development environment requires a box. You can search for
     # boxes at https://vagrantcloud.com/search.
@@ -23,7 +24,6 @@ Vagrant.configure("2") do |config|
 
     # Share an additional folder to the guest VM via Network Shared Folder.
     # You can find it at `/vagrant` on guest VM.
-    @vmname = ENV['VM_NAME']
     system "mkdir", "-p", "./synced-folder/#{@vmname}"
     mojave.vm.synced_folder "./synced-folder/#{@vmname}", "/vagrant",
       id: "vagrant-root",
@@ -33,28 +33,33 @@ Vagrant.configure("2") do |config|
     
     mojave.vm.provider "virtualbox" do |vb|
       vb.name = @vmname
-  
-      # Display the VirtualBox GUI when booting the machine. You might want to turn 3D accelerating to speed-up VM GUI.
-      # vb.gui = true
-  
+      
       # If your VM freezes with hfs mounted macintosh hd on device root_device then you need to set cpuidset
       #vb.customize ["modifyvm", :id, "--cpuidset", "1","000206a7","02100800","1fbae3bf","bfebfbff"]
-  
+
+      # Customize the OS type to reduce the footprint on the host with a 32bit VM type
+      vb.customize ["modifyvm", :id, "--ostype", "MacOS"]
+      
       # Customize the amount of memory on the VM:
-      # vb.memory = "4096"
-  
+      vb.memory = "2048"
+      vb.cpus = 2
       # Customize motherboard chipset
       # vb.customize ["modifyvm", :id, "--chipset", "ich9"]
   
       # Customize NAT DNS
       # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       # vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-  
+      
+      # Display the VirtualBox GUI when booting the machine. You might want to turn 3D accelerating to speed-up VM GUI.
+      vb.gui = true
+      vb.customize ['setextradata', :id, 'GUI/ScaleFactor', '1']
       # Set resolution on macOS
       # Values: 0 = 640x480, 1 = 800x600, 2 = 1024x768, 3 = 1280x1024, 4 = 1440x900, 5 = 1920x1200
-      # vb.customize ["setextradata", :id, "VBoxInternal2/EfiGopMode", "5"]
-      # vb.customize ["setextradata", :id, "CustomVideoMode1", "1920x1080x32"]
-      # vb.customize ["setextradata", :id, "GUI/CustomVideoMode1", "1920x1080x32"]
+      # vb.customize ["setextradata", :id, "VBoxInternal2/EfiGopMode", "4"]
+      # OR
+      vb.customize ["setextradata", :id, "VBoxInternal2/EfiGraphicsResolution", "1440x900"]
+      vb.customize ["setextradata", :id, "CustomVideoMode1", "1440x900x32"]
+      vb.customize ["setextradata", :id, "GUI/CustomVideoMode1", "1440x900x32"]
     end
 
     # mojave.vm.provision "shell", inline: <<-SHELL
@@ -73,7 +78,8 @@ Vagrant.configure("2") do |config|
   ###
   # Any macOS Catalina will be created from this Vagrant VM configuration
   ###
-  config.vm.define "catalina", primary: true do |catalina|
+  @vmname = ENV['VM_NAME']
+  config.vm.define "catalina" do |catalina|
     # Every Vagrant development environment requires a box. You can search for
     # boxes at https://vagrantcloud.com/search.
     catalina.vm.box = "ramsey/macos-catalina"
@@ -83,7 +89,6 @@ Vagrant.configure("2") do |config|
 
     # Share an additional folder to the guest VM via Network Shared Folder.
     # You can find it at `/vagrant` on guest VM.
-    @vmname = ENV['VM_NAME']
     system "mkdir", "-p", "./synced-folder/#{@vmname}"
     catalina.vm.synced_folder "./synced-folder/#{@vmname}", "/vagrant",
       id: "vagrant-root",
@@ -93,28 +98,33 @@ Vagrant.configure("2") do |config|
     
     catalina.vm.provider "virtualbox" do |vb|
       vb.name = @vmname
-  
-      # Display the VirtualBox GUI when booting the machine. You might want to turn 3D accelerating to speed-up VM GUI.
-      # vb.gui = true
-  
+      
       # If your VM freezes with hfs mounted macintosh hd on device root_device then you need to set cpuidset
       #vb.customize ["modifyvm", :id, "--cpuidset", "1","000206a7","02100800","1fbae3bf","bfebfbff"]
-  
+
+      # Customize the OS type to reduce the footprint on the host with a 32bit VM type
+      vb.customize ["modifyvm", :id, "--ostype", "MacOS"]
+      
       # Customize the amount of memory on the VM:
-      # vb.memory = "4096"
-  
+      vb.memory = "2048"
+      vb.cpus = 2
       # Customize motherboard chipset
       # vb.customize ["modifyvm", :id, "--chipset", "ich9"]
   
       # Customize NAT DNS
       # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       # vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-  
+      
+      # Display the VirtualBox GUI when booting the machine. You might want to turn 3D accelerating to speed-up VM GUI.
+      vb.gui = true
+      vb.customize ['setextradata', :id, 'GUI/ScaleFactor', '1']
       # Set resolution on macOS
       # Values: 0 = 640x480, 1 = 800x600, 2 = 1024x768, 3 = 1280x1024, 4 = 1440x900, 5 = 1920x1200
-      # vb.customize ["setextradata", :id, "VBoxInternal2/EfiGopMode", "5"]
-      # vb.customize ["setextradata", :id, "CustomVideoMode1", "1920x1080x32"]
-      # vb.customize ["setextradata", :id, "GUI/CustomVideoMode1", "1920x1080x32"]
+      # vb.customize ["setextradata", :id, "VBoxInternal2/EfiGopMode", "4"]
+      # OR
+      vb.customize ["setextradata", :id, "VBoxInternal2/EfiGraphicsResolution", "1440x900"]
+      vb.customize ["setextradata", :id, "CustomVideoMode1", "1440x900x32"]
+      vb.customize ["setextradata", :id, "GUI/CustomVideoMode1", "1440x900x32"]
     end
 
     # catalina.vm.provision "shell", inline: <<-SHELL

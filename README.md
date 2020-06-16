@@ -4,7 +4,7 @@
 
 ## Supported
 
-| Name | Type | Reference |
+| OS | Type | Reference |
 |------|------|-----------|
 | macOS Catalina | catalina | built on [vagrant box](https://app.vagrantup.com/ramsey/boxes/macos-catalina) |
 | macOS Mojave | mojave | built on [vagrant box](https://app.vagrantup.com/ramsey/boxes/macos-mojave) |

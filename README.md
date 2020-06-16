@@ -25,8 +25,8 @@ brew cask install vagrant-manager # optional
 Run the following:
 ```bash
 git clone git@github.com:adjogahm/virtualbox-vms.git
-
-VAGRANT_VAGRANTFILE="./virtualbox-vms/template.Vagrantfile" \
+cp "./virtualbox-vms/template.Vagrantfile" "./virtualbox-vms/Vagrantfile"
+VAGRANT_VAGRANTFILE="./virtualbox-vms/Vagrantfile" \
   VAGRANT_HOME="~/.vagrant.d" \
   VM_NAME="<VirtualBox VM name>" \
   vagrant up "<Vagrant box (type)>"

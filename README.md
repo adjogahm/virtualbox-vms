@@ -31,13 +31,13 @@ VAGRANT_VAGRANTFILE="./virtualbox-vms/Vagrantfile" \
   VM_NAME="<VirtualBox VM name>" \
   vagrant up "<Vagrant box (type)>"
 ```
-> For `<`Vagrant box (type)`>` 👉  [Supported](#supported)
+> For `<`Vagrant box (type)`>` 👉  [Supported Types](#supported)
 
 ### UI Credentials
 * Username: vagrant
 * Password: vagrant
 
-## Manage your VM boxes
+## Manage your Vagrant boxes and/or VMs
 
 ### With vagrant cli [docs](https://www.vagrantup.com/docs/cli)
 ```bash

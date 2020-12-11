@@ -2,12 +2,12 @@ exclude: '^$'
 default_stages: [push]
 repos:
 - repo: https://github.com/Yelp/detect-secrets
-  rev: v0.13.1
+  rev: v0.14.3
   hooks:
   - id: detect-secrets
     exclude: '^$'
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v3.1.0
+  rev: v3.3.0
   hooks:
   - id: detect-private-key
   - id: mixed-line-ending
